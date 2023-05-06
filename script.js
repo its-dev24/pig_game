@@ -1,21 +1,53 @@
 'use strict';
 //selecting all elements
-let score0El = document.getElementById('score--0');
-let score1El = document.getElementById('score--1');
-let diceEl = document.querySelector('.dice');
-let rollDiceBtn = document.querySelector('.btn--roll');
+const score0El = document.getElementById('score--0');
+const score1El = document.getElementById('score--1');
+const diceEl = document.querySelector('.dice');
+const rollDiceBtn = document.querySelector('.btn--roll');
+const newGameBtn = document.querySelector('.btn--new');
+const holdBtn = document.querySelector('.btn--hold');
+const current0El = document.getElementById('current--0');
+const current1El = document.getElementById('current--1');
 
 //intializing
 score0El.textContent = 0;
 score1El.textContent = 0;
 diceEl.classList.add('hidden');
+let currentScore = 0;
+let activePlayer = 0;
+let finalScore = [0,0];
+
+//function to set cuurent
+let setCurrentScore = function (score) {
+  document.getElementById(`current--${activePlayer}`).textContent = score;
+};
 
 //button functions
 
 //1.Roll dice button Function
 
 rollDiceBtn.addEventListener('click', function () {
+  //1.Generate a random number from 1 - 6
+  const dice = Math.trunc(Math.random() * 6) + 1;
+  console.log(dice);
+
+  //2.Display the dice
+
   if (diceEl.classList.contains('hidden')) {
     diceEl.classList.remove('hidden');
   }
+  diceEl.src = `dice-${dice}.png`;
+
+  //3.check if roll is 1
+
+  if (dice === 1) {
+    currentScore = 0;
+    setCurrentScore(currentScore);
+    activePlayer = activePlayer === 1 ? 0 : 1;
+  } else {
+    currentScore += dice;
+  }
+  setCurrentScore(currentScore);
 });
+
+//2.Hold Button
