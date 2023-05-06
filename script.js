@@ -93,3 +93,21 @@ holdBtn.addEventListener('click', function () {
     }
   }
 });
+
+//3. Reset Button
+newGameBtn.addEventListener('click', function () {
+  document
+    .querySelector(`.player--${activePlayer}`)
+    .classList.remove('player--winner');
+
+  activePlayer = 0;
+  document
+    .querySelector(`.player--${activePlayer}`)
+    .classList.add('player--active');
+  currentScore = 0;
+  finalScore = [0, 0];
+  score0El.textContent = 0;
+  score1El.textContent = 0;
+  current0El.textContent = 0;
+  current1El.textContent = 0;
+});
