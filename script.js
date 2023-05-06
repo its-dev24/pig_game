@@ -110,4 +110,5 @@ newGameBtn.addEventListener('click', function () {
   score1El.textContent = 0;
   current0El.textContent = 0;
   current1El.textContent = 0;
+  playing = true;
 });
