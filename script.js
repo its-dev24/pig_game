@@ -100,10 +100,10 @@ newGameBtn.addEventListener('click', function () {
     .querySelector(`.player--${activePlayer}`)
     .classList.remove('player--winner');
 
+  player0El.classList.add('player--active');
+  player1El.classList.remove('player--active');
+
   activePlayer = 0;
-  document
-    .querySelector(`.player--${activePlayer}`)
-    .classList.add('player--active');
   currentScore = 0;
   finalScore = [0, 0];
   score0El.textContent = 0;
