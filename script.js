@@ -94,7 +94,7 @@ holdBtn.addEventListener('click', function () {
     finalScore[activePlayer] += currentScore;
     //2.Dispay the final score
     setFinalScore();
-    if (finalScore[activePlayer] < 20) {
+    if (finalScore[activePlayer] < 100) {
       currentScore = 0;
       setCurrentScore(currentScore);
       switchActivePLayer();
