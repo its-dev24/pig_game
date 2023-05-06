@@ -18,6 +18,7 @@ diceEl.classList.add('hidden');
 let currentScore = 0;
 let activePlayer = 0;
 let finalScore = [0, 0];
+let playing = true;
 
 //function to set cuurent
 let setCurrentScore = function (score) {
@@ -44,38 +45,51 @@ const setFinalScore = function () {
 //1.Roll dice button Function
 
 rollDiceBtn.addEventListener('click', function () {
-  //1.Generate a random number from 1 - 6
-  const dice = Math.trunc(Math.random() * 6) + 1;
-  console.log(dice);
+  if (playing) {
+    //1.Generate a random number from 1 - 6
+    const dice = Math.trunc(Math.random() * 6) + 1;
+    console.log(dice);
 
-  //2.Display the dice
+    //2.Display the dice
 
-  if (diceEl.classList.contains('hidden')) {
-    diceEl.classList.remove('hidden');
-  }
-  diceEl.src = `dice-${dice}.png`;
+    if (diceEl.classList.contains('hidden')) {
+      diceEl.classList.remove('hidden');
+    }
+    diceEl.src = `dice-${dice}.png`;
 
-  //3.check if roll is 1
+    //3.check if roll is 1
 
-  if (dice === 1) {
-    currentScore = 0;
+    if (dice === 1) {
+      currentScore = 0;
+      setCurrentScore(currentScore);
+      switchActivePLayer();
+    } else {
+      currentScore += dice;
+    }
     setCurrentScore(currentScore);
-    switchActivePLayer();
-  } else {
-    currentScore += dice;
   }
-  setCurrentScore(currentScore);
 });
 
 //2.Hold Button
 holdBtn.addEventListener('click', function () {
   //1.Added value to the final score array
-  finalScore[activePlayer] += currentScore;
-  //2.Dispay the final score
-  setFinalScore();
-  if (finalScore[activePlayer] < 100) {
-    currentScore = 0;
-    setCurrentScore(currentScore);
-    switchActivePLayer();
+  if (playing) {
+    finalScore[activePlayer] += currentScore;
+    //2.Dispay the final score
+    setFinalScore();
+    if (finalScore[activePlayer] < 20) {
+      currentScore = 0;
+      setCurrentScore(currentScore);
+      switchActivePLayer();
+    } else {
+      document
+        .querySelector(`.player--${activePlayer}`)
+        .classList.add('player--winner');
+      document
+        .querySelector(`.player--${activePlayer}`)
+        .classList.remove('player--active');
+      playing = false;
+      diceEl.classList.add('hidden');
+    }
   }
 });
