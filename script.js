@@ -69,7 +69,9 @@ rollDiceBtn.addEventListener('click', function () {
 
 //2.Hold Button
 holdBtn.addEventListener('click', function () {
+  //1.Added value to the final score array
   finalScore[activePlayer] += currentScore;
+  //2.Dispay the final score
   setFinalScore();
   currentScore = 0;
   setCurrentScore(currentScore);
