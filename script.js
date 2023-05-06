@@ -11,14 +11,31 @@ const current1El = document.getElementById('current--1');
 const player0El = document.querySelector('.player--0');
 const player1El = document.querySelector('.player--1');
 
-//intializing
-score0El.textContent = 0;
-score1El.textContent = 0;
-diceEl.classList.add('hidden');
-let currentScore = 0;
-let activePlayer = 0;
-let finalScore = [0, 0];
-let playing = true;
+//Declaring
+
+let currentScore, activePlayer, finalScore, playing;
+
+//initialization function
+
+const init = function () {
+  score0El.textContent = 0;
+  score1El.textContent = 0;
+  diceEl.classList.add('hidden');
+  currentScore = 0;
+  activePlayer = 0;
+  finalScore = [0, 0];
+  playing = true;
+  player0El.classList.remove('player--winner');
+  player1El.classList.remove('player--winner');
+  player0El.classList.add('player--active');
+  player1El.classList.remove('player--active');
+  finalScore = [0, 0];
+  current0El.textContent = 0;
+  current1El.textContent = 0;
+  playing = true;
+};
+
+init();
 
 //function to set cuurent
 let setCurrentScore = function (score) {
@@ -95,20 +112,4 @@ holdBtn.addEventListener('click', function () {
 });
 
 //3. Reset Button
-newGameBtn.addEventListener('click', function () {
-  document
-    .querySelector(`.player--${activePlayer}`)
-    .classList.remove('player--winner');
-
-  player0El.classList.add('player--active');
-  player1El.classList.remove('player--active');
-
-  activePlayer = 0;
-  currentScore = 0;
-  finalScore = [0, 0];
-  score0El.textContent = 0;
-  score1El.textContent = 0;
-  current0El.textContent = 0;
-  current1El.textContent = 0;
-  playing = true;
-});
+newGameBtn.addEventListener('click', init);
